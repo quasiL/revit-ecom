@@ -12,6 +12,9 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      backgroundImage: {
+        "gradient-violet-pink": "linear-gradient(to right, #7F00FF, #E100FF)",
+      },
     },
   },
   plugins: [],
