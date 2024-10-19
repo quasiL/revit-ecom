@@ -23,7 +23,7 @@ export default function HeroSection() {
               <Button text="Free Download" />
             </div>
           </div>
-          <div className="">
+          <div>
             <Image
               src="/hero.png"
               alt="hero"
