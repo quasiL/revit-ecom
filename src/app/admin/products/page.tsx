@@ -39,7 +39,13 @@ export default function AdminProductsPage() {
 }
 
 async function ProductsTable() {
-  const products = await db.product.findMany({
+  const products: {
+    id: string;
+    name: string;
+    priceInCents: number;
+    isAvailableForPurchase: boolean;
+    _count: { orders: number };
+  }[] = await db.product.findMany({
     select: {
       id: true,
       name: true,
