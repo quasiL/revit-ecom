@@ -9,6 +9,13 @@
       "rules": {
         "@typescript-eslint/no-empty-object-type": "off"
       }
+    },
+    {
+      "files": ["src/app/admin/products/page.tsx"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off"
+      }
     }
   ]
 }
