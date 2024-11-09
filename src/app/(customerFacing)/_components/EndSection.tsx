@@ -13,7 +13,7 @@ export default function EndSection() {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 3000);
 
-    return () => clearInterval(interval); // Cleanup on component unmount
+    return () => clearInterval(interval);
   }, [images.length]);
 
   return (
@@ -34,11 +34,18 @@ export default function EndSection() {
             <p className="text-3xl">Plugin for Revit</p>
             <div className="h-14 w-[1px] bg-white"></div>
             <div className="flex gap-4">
-              <span className="icon_white mgc_home_6_line text-3xl"></span>
-              <span className="icon_white mgc_pen_line text-3xl"></span>
-              <span className="icon_white mgc_map_line text-3xl"></span>
-              <span className="icon_white mgc_ruler_line text-3xl"></span>
-              <span className="icon_white mgc_heart_line text-3xl"></span>
+              {[
+                "mgc_home_6_line",
+                "mgc_pen_line",
+                "mgc_map_line",
+                "mgc_ruler_line",
+                "mgc_heart_line",
+              ].map((iconClass, index) => (
+                <span
+                  key={index}
+                  className={`icon_white ${iconClass} text-3xl`}
+                />
+              ))}
             </div>
           </div>
           <div className="flex gap-12">

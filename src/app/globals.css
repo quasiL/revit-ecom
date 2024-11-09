@@ -13,6 +13,16 @@
   color: white !important;
 }
 
+.icon_gold::before {
+  -webkit-background-clip: text;
+  color: gold !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: black !important;
+}
+
 /* :root {
   --background: #ffffff;
   --foreground: #171717;
