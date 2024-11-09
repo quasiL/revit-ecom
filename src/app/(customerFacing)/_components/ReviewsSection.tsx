@@ -54,7 +54,7 @@ export default function ReviewsSection() {
         {reviews.map((review) => (
           <SwiperSlide key={review.id}>
             <div className="p-6 rounded-lg shadow-lg">
-              <p className="text-lg mb-4">"{review.text}"</p>
+              <p className="text-lg mb-4">&quot;{review.text}&quot;</p>
               <h4 className="font-semibold">{review.name}</h4>
             </div>
           </SwiperSlide>
