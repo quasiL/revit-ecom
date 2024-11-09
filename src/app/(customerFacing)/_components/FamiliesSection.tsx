@@ -10,23 +10,23 @@ export default function FamiliesSection() {
           </h1>
           <div className="flex flex-col gap-4 text-xl">
             <div className="flex gap-4 items-center">
-              <span className="mgc_cursor_2_fill text-3xl text-gray-500"></span>
+              <span className="icon_gradient mgc_cursor_2_fill text-3xl"></span>
               <h3>
                 Seamlessly add families to your project with a single clicklick
               </h3>
             </div>
             <div className="flex gap-4 items-center">
-              <span className="mgc_pen_fill text-3xl text-gray-500"></span>
+              <span className="icon_gradient mgc_pen_fill text-3xl text-gray-500"></span>
               <h3>Revit-crafted families</h3>
             </div>
             <div className="flex gap-4 items-center">
-              <span className="mgc_map_fill text-3xl text-gray-500"></span>
+              <span className="icon_gradient mgc_map_fill text-3xl text-gray-500"></span>
               <h3>
                 Stay ahead of trends: Source products from global manufacturers
               </h3>
             </div>
             <div className="flex gap-4 items-center">
-              <span className="mgc_ruler_fill text-3xl text-gray-500"></span>
+              <span className="icon_gradient mgc_ruler_fill text-3xl text-gray-500"></span>
               <h3>Weekly surprises: Get new family collections every week</h3>
             </div>
           </div>

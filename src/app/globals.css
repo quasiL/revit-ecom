@@ -2,11 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-[class^="mgc_"]::before,
-[class*=" mgc_"]::before {
+.icon_gradient::before {
   background: linear-gradient(to right, #7f00ff, #e100ff);
   -webkit-background-clip: text;
   color: transparent !important;
+}
+
+.icon_white::before {
+  -webkit-background-clip: text;
+  color: white !important;
 }
 
 /* :root {
