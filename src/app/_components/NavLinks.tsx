@@ -9,9 +9,7 @@ export default function NavLinks() {
   const links = [
     { name: "Home", href: "/" },
     { name: "Families", href: "/families" },
-    { name: "Plans", href: "/plans" },
-    { name: "Services", href: "/services" },
-    { name: "Gallery", href: "/gallery" },
+    { name: "Contacts", href: "/contacts" },
   ];
 
   return (
