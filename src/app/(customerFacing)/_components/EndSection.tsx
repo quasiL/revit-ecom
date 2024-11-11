@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Button from "./Button";
+import Button from "../../../components/CustomButton";
 
 export default function EndSection() {
   const images = ["/chairs1.jpeg", "/chairs2.jpeg", "/chairs3.jpeg"];
