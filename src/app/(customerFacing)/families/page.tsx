@@ -2,13 +2,18 @@ import db from "@/db/db";
 import { Suspense } from "react";
 import { Product } from "@prisma/client";
 import { ProductCardSkeleton, ProductCard } from "@/components/ProductCard";
+import { cache } from "@/lib/cache";
 
-function getProducts() {
-  return db.product.findMany({
-    where: { isAvailableForPurchase: true },
-    orderBy: { createdAt: "desc" },
-  });
-}
+const getProducts = cache(
+  () => {
+    return db.product.findMany({
+      where: { isAvailableForPurchase: true },
+      orderBy: { createdAt: "desc" },
+    });
+  },
+  ["/products", "getProducts"]
+  //{ revalidate: 60 * 60 * 24 }
+);
 
 export default function Families() {
   return (
