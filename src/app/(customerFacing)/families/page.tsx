@@ -11,7 +11,7 @@ const getProducts = cache(
       orderBy: { createdAt: "desc" },
     });
   },
-  ["/products", "getProducts"]
+  ["/families", "getProducts"]
   //{ revalidate: 60 * 60 * 24 }
 );
 

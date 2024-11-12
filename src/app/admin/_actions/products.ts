@@ -51,7 +51,7 @@ export async function addProduct(prevState: unknown, formData: FormData) {
     },
   });
 
-  revalidatePath("/products");
+  revalidatePath("/families");
 
   redirect("/admin/products");
 }
@@ -105,7 +105,7 @@ export async function updateProduct(
     },
   });
 
-  revalidatePath("/products");
+  revalidatePath("/families");
 
   redirect("/admin/products");
 }
@@ -116,7 +116,7 @@ export async function toggleProductAvailability(
 ) {
   await db.product.update({ where: { id }, data: { isAvailableForPurchase } });
 
-  revalidatePath("/products");
+  revalidatePath("/families");
 }
 
 export async function deleteProduct(id: string) {
@@ -127,5 +127,5 @@ export async function deleteProduct(id: string) {
   await fs.unlink(product.filePath);
   await fs.unlink(`public${product.imagePath}`);
 
-  revalidatePath("/products");
+  revalidatePath("/families");
 }
