@@ -29,6 +29,7 @@ type CheckoutFormProps = {
     name: string;
     priceInCents: number;
     description: string;
+    videoUrl: string;
   };
   clientSecret: string;
 };
@@ -59,11 +60,24 @@ export function CheckoutForm({ product, clientSecret }: CheckoutFormProps) {
           </div>
         </div>
       </div>
+      <iframe
+        width="560"
+        height="315"
+        src={getEmbedUrl(product.videoUrl)}
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
       <Elements options={{ clientSecret }} stripe={stripePromise}>
         <Form priceInCents={product.priceInCents} productId={product.id} />
       </Elements>
     </div>
   );
+}
+
+function getEmbedUrl(url: string) {
+  const videoId = url.split("v=")[1];
+  return `https://www.youtube-nocookie.com/embed/${videoId}`;
 }
 
 function Form({
