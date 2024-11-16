@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer>
-      <div className="container mx-auto flex justify-between p-8">
+    <footer className="bg-gray-200">
+      <div className="container mx-auto flex items-center justify-between p-8">
         <div className="flex gap-8">
           {[
             { text: "About", href: "/about" },

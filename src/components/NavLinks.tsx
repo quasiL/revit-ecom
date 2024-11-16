@@ -9,7 +9,8 @@ export default function NavLinks() {
   const links = [
     { name: "Home", href: "/" },
     { name: "Families", href: "/families" },
-    { name: "Contacts", href: "/contacts" },
+    { name: "Contact", href: "/contact" },
+    { name: "Services", href: "/services" },
   ];
 
   return (

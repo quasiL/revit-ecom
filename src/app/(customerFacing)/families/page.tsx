@@ -17,26 +17,20 @@ const getProducts = cache(
 
 export default function Families() {
   return (
-    <main className="container mx-auto space-y-12">
-      <ProductGridSection title="Families" productsFetcher={getProducts} />
+    <main className="container mx-auto">
+      <h2 className="text-3xl font-bold py-6">Families</h2>
+      <ProductGridSection productsFetcher={getProducts} />
     </main>
   );
 }
 
 type ProductGridSectionProps = {
-  title: string;
   productsFetcher: () => Promise<Product[]>;
 };
 
-function ProductGridSection({
-  productsFetcher,
-  title,
-}: ProductGridSectionProps) {
+function ProductGridSection({ productsFetcher }: ProductGridSectionProps) {
   return (
-    <div className="space-y-4 mt-6">
-      <div className="flex gap-4">
-        <h2 className="text-3xl font-bold pb-6">{title}</h2>
-      </div>
+    <div className="mt-4">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <Suspense
           fallback={

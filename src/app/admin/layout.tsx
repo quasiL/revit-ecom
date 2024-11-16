@@ -1,4 +1,4 @@
-import { AdminNavBar, NavLink } from "@/components/AdminNavBar";
+import { AdminNavBar, NavLink } from "@/app/admin/_components/AdminNavBar";
 
 export const dynamic = "force-dynamic";
 
