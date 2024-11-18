@@ -10,7 +10,7 @@ export default function NavLinks() {
     { name: "Home", href: "/" },
     { name: "Families", href: "/families" },
     { name: "Contact", href: "/contact" },
-    { name: "Services", href: "/services" },
+    { name: "My orders", href: "/orders" },
   ];
 
   return (

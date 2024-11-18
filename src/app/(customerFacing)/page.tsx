@@ -1,4 +1,3 @@
-import Footer from "../../components/Footer";
 import EndSection from "./_components/EndSection";
 import FamiliesSection from "./_components/FamiliesSection";
 import HeroSection from "./_components/HeroSection";
@@ -11,7 +10,6 @@ export default function Home() {
       <FamiliesSection />
       <ReviewsSection />
       <EndSection />
-      <Footer />
     </>
   );
 }
