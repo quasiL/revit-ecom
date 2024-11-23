@@ -1,4 +1,4 @@
-import Button from "../../../components/CustomButton";
+import CustomButton from "../../../components/CustomButton";
 
 export default function FamiliesSection() {
   return (
@@ -31,8 +31,8 @@ export default function FamiliesSection() {
             </div>
           </div>
           <div className="flex gap-8 pl-2">
-            <Button text="View Plans" />
-            <Button text="Free Download" />
+            <CustomButton href="/families">View Plans</CustomButton>
+            <CustomButton href="/#">Free Download</CustomButton>
           </div>
         </div>
       </div>

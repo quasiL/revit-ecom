@@ -61,6 +61,7 @@ export async function emailOrderHistory(
   });
 
   if (user == null) {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     return {
       message:
         "Check your email to view your order history and download your products.",

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Button from "../../../components/CustomButton";
+import CustomButton from "../../../components/CustomButton";
 
 export default function HeroSection() {
   return (
@@ -19,8 +19,8 @@ export default function HeroSection() {
               interior design with the Blocks Plugin
             </h2>
             <div className="flex gap-8 pl-2">
-              <Button text="View Plans" />
-              <Button text="Free Download" />
+              <CustomButton href="/families">View Plans</CustomButton>
+              <CustomButton href="/#">Free Download</CustomButton>
             </div>
           </div>
           <div>

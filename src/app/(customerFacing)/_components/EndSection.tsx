@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Button from "../../../components/CustomButton";
+import CustomButton from "../../../components/CustomButton";
 
 export default function EndSection() {
   const images = ["/chairs1.jpeg", "/chairs2.jpeg", "/chairs3.jpeg"];
@@ -55,8 +55,8 @@ export default function EndSection() {
             </div>
           </div>
           <div className="flex gap-12">
-            <Button text="View Plans" />
-            <Button text="Free Download" />
+            <CustomButton href="/families">View Plans</CustomButton>
+            <CustomButton href="/#">Free Download</CustomButton>
           </div>
         </div>
       </div>

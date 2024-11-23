@@ -1,8 +1,29 @@
+import Link from "next/link";
+
 export default function CustomButton({
-  text,
+  children,
+  submit,
+  href,
+}: {
+  children: React.ReactNode;
+  submit?: boolean;
+  href?: string;
+}) {
+  if (!href) {
+    return <Button submit={submit}>{children}</Button>;
+  }
+  return (
+    <Link href={href}>
+      <Button>{children}</Button>
+    </Link>
+  );
+}
+
+function Button({
+  children,
   submit,
 }: {
-  text: string;
+  children: React.ReactNode;
   submit?: boolean;
 }) {
   return (
@@ -11,7 +32,7 @@ export default function CustomButton({
       type={submit ? "submit" : "button"}
     >
       <div className="flex h-full w-full items-center justify-center bg-gray-700 px-5 py-3 rounded-xl hover:bg-gradient-violet-pink">
-        <p className="text-white">{text}</p>
+        <p className="text-white">{children}</p>
       </div>
     </button>
   );

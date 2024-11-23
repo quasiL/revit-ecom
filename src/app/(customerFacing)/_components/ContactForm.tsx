@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { z } from "zod";
 import emailjs from "@emailjs/browser";
 import {
@@ -51,35 +51,38 @@ export default function ContactForm() {
 
   const formRef = useRef<HTMLFormElement | null>(null);
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID as string;
   const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID as string;
   const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY as string;
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (formRef.current) {
-      emailjs
-        .sendForm(serviceId, templateId, formRef.current, {
-          publicKey: publicKey,
-        })
-        .then(
-          () => {
-            toast({
-              title: "Email sent successfully",
-              description: `Thanks ${values.name}, I'll be in touch.`,
-            });
-            form.reset();
-          },
-          (error) => {
-            console.warn("Email could not be sent", JSON.stringify(error));
-            toast({
-              variant: "destructive",
-              title: "Email was not sent",
-              description: "Something went wrong, please try again.",
-            });
-          }
+      setIsSubmitting(true);
+      try {
+        await emailjs.sendForm(
+          serviceId,
+          templateId,
+          formRef.current,
+          publicKey
         );
+        toast({
+          title: "Email sent successfully",
+          description: `Thanks ${values.name}, I'll be in touch.`,
+        });
+        form.reset();
+      } catch (error) {
+        console.warn("Email could not be sent", error);
+        toast({
+          variant: "destructive",
+          title: "Email was not sent",
+          description: "Something went wrong, please try again.",
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
     }
-  }
+  };
 
   return (
     <section className="w-3/5 mx-auto mb-7">
@@ -151,7 +154,9 @@ export default function ContactForm() {
                   </FormItem>
                 )}
               />
-              <CustomButton text="Submit" submit={true} />
+              <CustomButton submit={true}>
+                {isSubmitting ? "Sending..." : "Submit"}
+              </CustomButton>
             </form>
           </Form>
         </div>

@@ -16,7 +16,13 @@ export default function NavBar() {
             height={100}
             className="w-12 h-12 object-contain"
           />
-          <span className="text-3xl font-semibold">Simple Revit</span>
+          <Image
+            src="/logo_text.svg"
+            alt="Logo Text"
+            width={350}
+            height={150}
+            className="h-auto w-auto"
+          />
         </Link>
         <NavLinks />
       </div>
