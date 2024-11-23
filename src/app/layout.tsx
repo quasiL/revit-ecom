@@ -7,8 +7,8 @@ import { Toaster } from "@/components/ui/toaster";
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "200"] });
 
 export const metadata: Metadata = {
-  title: "Revit ecom",
-  description: "Revit ecom",
+  title: "Simple Revit",
+  description: "Simple Revit",
 };
 
 export default async function RootLayout({

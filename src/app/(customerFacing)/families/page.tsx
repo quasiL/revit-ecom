@@ -3,6 +3,12 @@ import { Suspense } from "react";
 import { Product } from "@prisma/client";
 import { ProductCardSkeleton, ProductCard } from "@/components/ProductCard";
 import { cache } from "@/lib/cache";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Families",
+  description: "families",
+};
 
 const getProducts = cache(
   () => {
