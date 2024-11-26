@@ -21,6 +21,13 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
 import { FormEvent, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, FreeMode, Thumbs, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/free-mode";
+import "swiper/css/thumbs";
 
 type CheckoutFormProps = {
   product: {
@@ -32,30 +39,45 @@ type CheckoutFormProps = {
     videoUrl: string;
   };
   clientSecret: string;
+  images: { imagePath: string }[];
 };
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string
 );
 
-export function CheckoutForm({ product, clientSecret }: CheckoutFormProps) {
+export function CheckoutForm({
+  product,
+  clientSecret,
+  images = [],
+}: CheckoutFormProps) {
   return (
-    <div className="max-w-5xl w-full mx-auto space-y-8">
-      <div className="flex gap-4 items-center">
-        <div className="aspect-video flex-shrink-0 w-1/3 relative">
-          <Image
-            src={product.imagePath}
-            fill
-            alt={product.name}
-            className="object-cover"
-          />
+    <div className="max-w-7xl w-full mx-auto space-y-8 py-6">
+      <div className="flex gap-10 items-start">
+        <div className="w-2/3">
+          <Swiper
+            loop={true}
+            spaceBetween={10}
+            navigation={true}
+            pagination={{
+              clickable: true,
+            }}
+            modules={[FreeMode, Navigation, Thumbs, Pagination]}
+            className="aspect-video flex-shrink-0 rounded-lg"
+          >
+            {images.map((image, index) => (
+              <SwiperSlide key={index}>
+                <Image src={image.imagePath} alt={product.name} fill />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
         <div>
           <div className="text-lg">
             {formatCurrency(product.priceInCents / 100)}
           </div>
           <h1 className="text-2xl font-bold">{product.name}</h1>
-          <div className="line-clamp-3 text-muted-foreground">
+          <div className="line-clamp-6 text-muted-foreground">
             {product.description}
           </div>
         </div>

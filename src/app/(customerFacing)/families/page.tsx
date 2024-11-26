@@ -21,6 +21,15 @@ const getProducts = cache(
   //{ revalidate: 60 * 60 * 24 }
 );
 
+const getProductImages = cache(
+  async (productId: string) => {
+    return db.productImage.findMany({
+      where: { productId },
+    });
+  },
+  ["/families", "getProductImages"]
+);
+
 export default function Families() {
   return (
     <main className="container mx-auto">
@@ -61,7 +70,18 @@ async function ProductSuspense({
 }: {
   productsFetcher: () => Promise<Product[]>;
 }) {
-  return (await productsFetcher()).map((product) => (
-    <ProductCard key={product.id} {...product} />
-  ));
+  const products = await productsFetcher();
+  return (
+    <>
+      {await Promise.all(
+        products.map(async (product) => {
+          const productImages = await getProductImages(product.id);
+
+          return (
+            <ProductCard key={product.id} {...product} images={productImages} />
+          );
+        })
+      )}
+    </>
+  );
 }

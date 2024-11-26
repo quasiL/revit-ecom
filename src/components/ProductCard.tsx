@@ -16,7 +16,7 @@ type ProductCardProps = {
   name: string;
   priceInCents: number;
   description: string;
-  imagePath: string;
+  images: { imagePath: string }[];
 };
 
 export function ProductCard({
@@ -24,12 +24,15 @@ export function ProductCard({
   name,
   priceInCents,
   description,
-  imagePath,
+  images,
 }: ProductCardProps) {
+  const imageSrc = images?.[0]?.imagePath;
+  const imageAlt = `${name} image`;
+
   return (
     <Card className="flex overflow-hidden flex-col">
       <div className="relative w-full h-auto aspect-video">
-        <Image src={imagePath} fill alt={name} />
+        <Image src={imageSrc} alt={imageAlt} layout="fill" objectFit="cover" />
       </div>
       <CardHeader>
         <CardTitle>{name}</CardTitle>
