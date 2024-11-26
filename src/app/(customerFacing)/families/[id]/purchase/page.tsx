@@ -13,6 +13,10 @@ export default async function PurchasePage({
   const product = await db.product.findUnique({ where: { id } });
   if (product == null) return notFound();
 
+  const productImages = await db.productImage.findMany({
+    where: { productId: id },
+  });
+
   const paymentIntent = await stripe.paymentIntents.create({
     amount: product.priceInCents,
     currency: "EUR",
@@ -27,6 +31,7 @@ export default async function PurchasePage({
     <CheckoutForm
       product={product}
       clientSecret={paymentIntent.client_secret}
+      images={productImages}
     />
   );
 }

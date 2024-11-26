@@ -6,22 +6,50 @@ import fs from "fs/promises";
 import { notFound, redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
-const fileSchema = z.instanceof(File, { message: "Required" });
-const imageSchema = fileSchema.refine(
-  (file) => file.size === 0 || file.type.startsWith("image/")
-);
-
 const addSchema = z.object({
-  name: z.string().min(1),
-  description: z.string().min(1),
-  priceInCents: z.coerce.number().int().min(1),
-  file: fileSchema.refine((file) => file.size > 0, "Required"),
-  image: imageSchema.refine((file) => file.size > 0, "Required"),
-  videoUrl: z.string().min(1),
+  name: z.string().min(1, "Name is required"),
+  description: z.string().min(1, "Description is required"),
+  priceInCents: z.coerce
+    .number()
+    .int()
+    .min(1, "Price must be greater than zero"),
+  file: z
+    .instanceof(File, { message: "File is required" })
+    .refine((file) => file.size > 0, { message: "File cannot be empty" }),
+  images: z
+    .array(
+      z
+        .instanceof(File)
+        .refine((file) => file.size > 0, "Image cannot be empty")
+    )
+    .nonempty({ message: "At least one image is required" }),
+  videoUrl: z.string().url("Invalid video URL").optional(),
 });
 
+type ProcessedFormData = {
+  name: string;
+  description: string;
+  priceInCents: number;
+  file: File | null;
+  images: File[];
+  videoUrl: string;
+};
+
+const preprocessFormData = (formData: FormData): ProcessedFormData => {
+  return {
+    name: (formData.get("name") as string) || "",
+    description: (formData.get("description") as string) || "",
+    priceInCents: Number(formData.get("priceInCents")) || 0,
+    file: formData.get("file") as File,
+    images: formData.getAll("images") as File[],
+    videoUrl: (formData.get("videoUrl") as string) || "",
+  };
+};
+
 export async function addProduct(prevState: unknown, formData: FormData) {
-  const result = addSchema.safeParse(Object.fromEntries(formData.entries()));
+  const processedData = preprocessFormData(formData);
+  const result = addSchema.safeParse(processedData);
+
   if (result.success === false) {
     return result.error.formErrors.fieldErrors;
   }
@@ -32,23 +60,35 @@ export async function addProduct(prevState: unknown, formData: FormData) {
   const filePath = `products/${crypto.randomUUID()}-${data.file.name}`;
   await fs.writeFile(filePath, Buffer.from(await data.file.arrayBuffer()));
 
+  const imagePaths: string[] = [];
   await fs.mkdir("public/products", { recursive: true });
-  const imagePath = `/products/${crypto.randomUUID()}-${data.image.name}`;
-  await fs.writeFile(
-    `public${imagePath}`,
-    Buffer.from(await data.image.arrayBuffer())
-  );
+  for (const image of data.images) {
+    const imagePath = `/products/${crypto.randomUUID()}-${image.name}`;
+    await fs.writeFile(
+      `public${imagePath}`,
+      Buffer.from(await image.arrayBuffer())
+    );
+    imagePaths.push(imagePath);
+  }
 
-  await db.product.create({
+  const product = await db.product.create({
     data: {
       isAvailableForPurchase: false,
       name: data.name,
       description: data.description,
       priceInCents: data.priceInCents,
       filePath,
-      imagePath,
       videoUrl: data.videoUrl,
     },
+  });
+
+  const imageEntries = imagePaths.map((imagePath) => ({
+    productId: product.id,
+    imagePath: imagePath,
+  }));
+
+  await db.productImage.createMany({
+    data: imageEntries,
   });
 
   revalidatePath("/families");
@@ -57,8 +97,8 @@ export async function addProduct(prevState: unknown, formData: FormData) {
 }
 
 const editSchema = addSchema.extend({
-  file: fileSchema.optional(),
-  image: imageSchema.optional(),
+  file: z.instanceof(File, { message: "File is required" }).optional(),
+  images: z.array(z.instanceof(File)).optional(),
 });
 
 export async function updateProduct(
@@ -66,7 +106,8 @@ export async function updateProduct(
   prevState: unknown,
   formData: FormData
 ) {
-  const result = editSchema.safeParse(Object.fromEntries(formData.entries()));
+  const processedData = preprocessFormData(formData);
+  const result = editSchema.safeParse(processedData);
   if (result.success === false) {
     return result.error.formErrors.fieldErrors;
   }
@@ -83,14 +124,37 @@ export async function updateProduct(
     await fs.writeFile(filePath, Buffer.from(await data.file.arrayBuffer()));
   }
 
-  let imagePath = product.imagePath;
-  if (data.image != null && data.image.size > 0) {
-    await fs.unlink(`public${product.imagePath}`);
-    imagePath = `/products/${crypto.randomUUID()}-${data.image.name}`;
-    await fs.writeFile(
-      `public${imagePath}`,
-      Buffer.from(await data.image.arrayBuffer())
-    );
+  const imagesUpdated = formData.get("imagesUpdated") === "true";
+
+  if (data.images != null && imagesUpdated) {
+    const oldImages = await db.productImage.findMany({
+      where: { productId: product.id },
+    });
+    for (const image of oldImages) {
+      await fs.unlink(`public${image.imagePath}`);
+    }
+    await db.productImage.deleteMany({
+      where: { productId: product.id },
+    });
+
+    const imagePaths: string[] = [];
+    for (const image of data.images) {
+      const imagePath = `/products/${crypto.randomUUID()}-${image.name}`;
+      await fs.writeFile(
+        `public${imagePath}`,
+        Buffer.from(await image.arrayBuffer())
+      );
+      imagePaths.push(imagePath);
+    }
+
+    const imageEntries = imagePaths.map((imagePath) => ({
+      productId: product.id,
+      imagePath: imagePath,
+    }));
+
+    await db.productImage.createMany({
+      data: imageEntries,
+    });
   }
 
   await db.product.update({
@@ -100,7 +164,6 @@ export async function updateProduct(
       description: data.description,
       priceInCents: data.priceInCents,
       filePath,
-      imagePath,
       videoUrl: data.videoUrl,
     },
   });
@@ -120,12 +183,16 @@ export async function toggleProductAvailability(
 }
 
 export async function deleteProduct(id: string) {
+  const productImages = await db.productImage.findMany({
+    where: { productId: id },
+  });
+  for (const image of productImages) {
+    await fs.unlink(`public${image.imagePath}`);
+  }
+
   const product = await db.product.delete({ where: { id } });
-
   if (product == null) return notFound();
-
   await fs.unlink(product.filePath);
-  await fs.unlink(`public${product.imagePath}`);
 
   revalidatePath("/families");
 }
