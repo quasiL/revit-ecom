@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import CustomButton from "../../../components/CustomButton";
 
 export default function EndSection() {
@@ -30,14 +31,10 @@ export default function EndSection() {
       <div className="bg-gray-900">
         <div className="container mx-auto flex justify-between items-center p-12 text-white">
           <div className="flex gap-4 items-center">
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              width={100}
-              height={100}
-              className="w-12 h-12 object-contain"
-            />
-            <span className="text-3xl font-semibold">Simple Revit</span>
+            <Link className="flex items-center gap-4" href="/">
+              <img src="/logo.svg" alt="Logo" className="w-14" />
+              <img src="/textlogo.svg" alt="Text Logo" className="w-72" />
+            </Link>
             <div className="h-14 w-[1px] bg-white"></div>
             <div className="flex gap-4">
               {[

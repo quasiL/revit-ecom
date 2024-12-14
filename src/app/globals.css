@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .icon_gradient::before {
-  background: linear-gradient(to right, #7f00ff, #e100ff);
+  background: linear-gradient(to right, #e4f296, #00f2d2);
   -webkit-background-clip: text;
   color: transparent !important;
 }

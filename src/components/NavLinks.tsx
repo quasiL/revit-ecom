@@ -15,7 +15,7 @@ export default function NavLinks() {
 
   return (
     <>
-      <div className="flex gap-8 text-gray-500">
+      <div className="flex gap-8 text-gray-400">
         {links.map((link) => {
           return (
             <div key={link.name} className="flex items-center gap-2 group">
@@ -24,8 +24,8 @@ export default function NavLinks() {
                 href={link.href}
                 className={clsx({
                   "font-bold": pathname === link.href,
-                  "text-black": pathname === link.href,
-                  "hover:text-gray-800": pathname !== link.href,
+                  "text-white": pathname === link.href,
+                  "hover:text-white": pathname !== link.href,
                 })}
               >
                 <p>{link.name}</p>
