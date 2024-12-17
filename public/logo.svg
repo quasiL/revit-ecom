@@ -12,20 +12,61 @@
    inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
      id="defs1">
+    <linearGradient
+       id="linearGradient6"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#00ffcf;stop-opacity:1;"
+         offset="0.45009786"
+         id="stop8" />
+      <stop
+         style="stop-color:#00ffcf;stop-opacity:1;"
+         offset="1"
+         id="stop7" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#e4f296;stop-opacity:1;"
+         offset="0.11941177"
+         id="stop17" />
+      <stop
+         style="stop-color:#c2ffc4;stop-opacity:1;"
+         offset="0.29382616"
+         id="stop9" />
+      <stop
+         style="stop-color:#00d1c8;stop-opacity:1;"
+         offset="0.79352629"
+         id="stop15" />
+      <stop
+         style="stop-color:#2cffc9;stop-opacity:0.96470588;"
+         offset="0.99989998"
+         id="stop16" />
+      <stop
+         style="stop-color:#35ffcf;stop-opacity:1;"
+         offset="1"
+         id="stop3" />
+      <stop
+         style="stop-color:#00f2d2;stop-opacity:1;"
+         offset="1"
+         id="stop4" />
+    </linearGradient>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Clean Edges"
        id="filter11"
-       x="-0.0085773004"
-       y="-0.0085881163"
-       width="1.0171547"
-       height="1.0166252">
+       x="-0.010241005"
+       y="-0.010257264"
+       width="1.0204821"
+       height="1.0198533">
       <feGaussianBlur
-         stdDeviation="0.264817"
+         stdDeviation="1.3798741"
          result="blur"
          id="feGaussianBlur10" />
       <feComposite
@@ -37,7 +78,6 @@
       <feComposite
          in="composite1"
          in2="composite1"
-         k2="1"
          operator="in"
          result="fbSourceGraphic"
          id="feComposite11" />
@@ -61,7 +101,6 @@
          id="feComposite13"
          in="composite1"
          in2="composite1"
-         k2="1"
          operator="in"
          result="fbSourceGraphic" />
       <feColorMatrix
@@ -84,7 +123,6 @@
          id="feComposite15"
          in="composite1"
          in2="composite1"
-         k2="1"
          operator="in"
          result="fbSourceGraphic" />
       <feColorMatrix
@@ -107,10 +145,29 @@
          id="feComposite17"
          in="composite1"
          in2="composite1"
-         k2="1"
          operator="in"
          result="composite2" />
     </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3"
+       id="linearGradient4"
+       x1="1533.0975"
+       y1="2858.9985"
+       x2="3156.0173"
+       y2="1890.7762"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="pad" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6"
+       id="linearGradient8"
+       x1="1515.0277"
+       y1="2327.0967"
+       x2="3210.8936"
+       y2="2327.0967"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="repeat" />
   </defs>
   <sodipodi:namedview
      id="namedview1"
@@ -122,15 +179,16 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="in"
-     inkscape:zoom="2"
-     inkscape:cx="-6"
-     inkscape:cy="210.75"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="98.111067"
+     inkscape:cy="168.46819"
      inkscape:window-width="2560"
      inkscape:window-height="1361"
      inkscape:window-x="1911"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
+     inkscape:current-layer="layer1"
+     showgrid="false" />
   <g
      inkscape:groupmode="layer"
      id="layer1"
@@ -142,9 +200,9 @@
        fill="none"
        stroke="#000000"
        stroke-width="1"
-       d="m 2312,1437 v 832 c 0,2.27 0.22,5.66 -1.02,7.61 -1.8,2.82 -17.08,9.69 -20.98,11.64 l -36,18.5 -33,16.67 -43,21.83 -30,15.49 -9,3.59 -18,8.93 -206,104.99 -67,34.49 -104,53 -63,32.01 -37,18.67 -37,18.83 -28,14.5 -15,7.49 c -1.46,0.69 -4.73,2.45 -6.18,0.95 -1.32,-1.36 0.13,-3.88 0.82,-5.19 0,0 4.4398,-7.3416 6.68,-11 10.2286,-16.7044 30.87,-50 30.87,-50 l 128.81,-209 21.58,-34 66,-107 192.84,-313 152.38,-247 c 53.4933,-81.0435 96.0826,-168.4036 154.2,-245 z m 105,0 c 71.2627,105.7433 135.8507,216.3496 202.81,325 l 225.77,366 139.84,227 11.16,17 115.23,187 37.61,61 21.58,36 c 0.8636,1.4407 1.0239,1.0754 -2.4661,-0.1094 -2.7027,-0.9175 -9.8905,-3.4226 -22.5339,-9.5806 l -37,-18.56 -22,-11.5 -236,-120 -74,-37.99 -43,-21.52 -116,-59.48 -25,-12.47 -10,-4.05 -22,-11.49 -44,-22.39 -36,-18.11 -41,-21 -15,-7.5 c -2.58,-1.3 -6.47,-2.91 -7.98,-5.46 -1.22,-2.08 -1.02,-5.41 -1.02,-7.79 v -572 -176 -54 c 0,-7.21 -0.78,-21.72 1,-28 z M 1529.1381,2792.4834 C 1536.9967,2788.2019 1546,2783.25 1546,2783.25 l 47,-23.99 43,-21.52 63,-32.49 208,-105.99 96,-48.52 133,-67.99 165,-84 45,-23 c 3.36,-1.68 16.35,-8.87 19,-8.95 2.77,-0.07 8.35,3.12 11,4.45 l 22,11 83,42.5 204,103.99 102,51.95 37,18.56 61,31.01 116,59.49 53,27 48,24.39 36,18.11 38,19.5 16.98,8.51 c 1.88,1.04 5.12,2.72 3.85,5.4 -0.78,1.65 -4.24,3.42 -5.83,4.34 l -16,8.25 -61,31 -138,70.49 -94,47.52 -220,112.48 -43,21.52 -123,62.99 -99,50.5 -25,12.5 c -3.43,1.71 -8.12,4.74 -12,4.01 -2.52,-0.47 -13.9,-6.46 -17,-8.01 l -35,-17.99 -103,-52.48 -97,-49.04 -220,-112.48 -147,-74.52 -122,-62.49 -67,-34 c -4.07,-2.04 -18.0261,-9.7641 -20.8576,-12.1234 -1.0364,-0.8966 -3.1589,-2.0142 -2.0043,-2.6432 z"
-       sodipodi:nodetypes="csccccccccccccccccccaccccccccccccccsscccccccccccccccsccscsccccccccccccccccccccccccccccccccccccccccccccs"
-       style="fill:#00ffcc;filter:url(#filter11)"
+       d="m 2312,1437 v 832 c 0,2.27 0.22,5.66 -1.02,7.61 -1.8,2.82 -17.08,9.69 -20.98,11.64 l -36,18.5 -33,16.67 -43,21.83 -30,15.49 -9,3.59 -18,8.93 -206,104.99 -67,34.49 -104,53 -63,32.01 -37,18.67 -37,18.83 -28,14.5 -15,7.49 c -1.46,0.69 -4.73,2.45 -6.18,0.95 -1.32,-1.36 0.13,-3.88 0.82,-5.19 0,0 4.4398,-7.3416 6.68,-11 10.2286,-16.7044 30.87,-50 30.87,-50 l 128.81,-209 21.58,-34 66,-107 192.84,-313 152.38,-247 c 53.4933,-81.0435 96.0826,-168.4036 154.2,-245 z m 105,0 c 71.2627,105.7433 135.8507,216.3496 202.81,325 l 225.77,366 139.84,227 11.16,17 115.23,187 37.61,61 21.58,36 c 0.8636,1.4407 1.0239,1.0754 -2.4661,-0.1094 -2.7027,-0.9175 -9.8905,-3.4226 -22.5339,-9.5806 l -37,-18.56 -22,-11.5 -236,-120 -74,-37.99 -43,-21.52 -116,-59.48 -25,-12.47 -10,-4.05 -22,-11.49 -44,-22.39 -36,-18.11 -41,-21 -15,-7.5 c -2.58,-1.3 -6.47,-2.91 -7.98,-5.46 -1.22,-2.08 -1.02,-5.41 -1.02,-7.79 v -572 -230 c 0,-7.21 -0.78,-21.72 1,-28 z M 1529.1381,2792.4834 C 1536.9967,2788.2019 1546,2783.25 1546,2783.25 l 47,-23.99 43,-21.52 63,-32.49 208,-105.99 96,-48.52 133,-67.99 165,-84 45,-23 c 3.36,-1.68 16.35,-8.87 19,-8.95 2.77,-0.07 8.35,3.12 11,4.45 l 22,11 83,42.5 204,103.99 102,51.95 37,18.56 61,31.01 116,59.49 53,27 48,24.39 36,18.11 38,19.5 16.98,8.51 c 1.88,1.04 5.12,2.72 3.85,5.4 -0.78,1.65 -4.24,3.42 -5.83,4.34 l -16,8.25 -61,31 -138,70.49 -94,47.52 -220,112.48 -43,21.52 -123,62.99 -99,50.5 -25,12.5 c -3.43,1.71 -8.12,4.74 -12,4.01 -2.52,-0.47 -13.9,-6.46 -17,-8.01 l -35,-17.99 -103,-52.48 -97,-49.04 -220,-112.48 -147,-74.52 -122,-62.49 -67,-34 c -4.07,-2.04 -18.0261,-9.7641 -20.8576,-12.1234 -1.0364,-0.8966 -3.1589,-2.0142 -2.0043,-2.6432 z"
+       sodipodi:nodetypes="csccccccccccccccccccaccccccccccccccsscccccccccccccccscscsccccccccccccccccccccccccccccccccccccccccccccs"
+       style="fill:url(#linearGradient4);stroke:url(#linearGradient8);stroke-width:1.2;stroke-dasharray:none;filter:url(#filter11);opacity:1"
        inkscape:label="Selection" />
   </g>
 </svg>
