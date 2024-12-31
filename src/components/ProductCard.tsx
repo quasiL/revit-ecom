@@ -10,6 +10,7 @@ import {
 import { Button } from "./ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import CustomButton from "./CustomButton";
 
 type ProductCardProps = {
   id: string;
@@ -34,17 +35,15 @@ export function ProductCard({
       <div className="relative w-full h-auto aspect-video">
         <Image src={imageSrc} alt={imageAlt} layout="fill" objectFit="cover" />
       </div>
-      <CardHeader>
+      <CardHeader className="flex flex-col gap-1">
         <CardTitle>{name}</CardTitle>
-        <CardDescription>{formatCurrency(priceInCents / 100)}</CardDescription>
+        <CardTitle>{formatCurrency(priceInCents / 100)}</CardTitle>
       </CardHeader>
       <CardContent className="flex-grow">
         <p className="line-clamp-4">{description}</p>
       </CardContent>
       <CardFooter>
-        <Button asChild size="lg" className="w-full">
-          <Link href={`/families/${id}/purchase`}>Purchase</Link>
-        </Button>
+        <CustomButton href={`/families/${id}/purchase`}>About</CustomButton>
       </CardFooter>
     </Card>
   );

@@ -34,12 +34,6 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-      <div className="flex justify-center gap-40 py-10 text-lg font-bold text-white bg-black">
-        <h4>Native modeling in Revit</h4>
-        <h4>Parametric families</h4>
-        <h4>Ready-to-render textures</h4>
-        <h4>BIM</h4>
-      </div>
     </section>
   );
 }

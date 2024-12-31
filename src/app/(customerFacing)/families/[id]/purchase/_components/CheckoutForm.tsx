@@ -52,7 +52,7 @@ export function CheckoutForm({
   images = [],
 }: CheckoutFormProps) {
   return (
-    <div className="max-w-7xl w-full mx-auto space-y-8 py-6">
+    <div className="max-w-7xl w-full mx-auto space-y-8 py-6 text-white">
       <div className="flex gap-10 items-start">
         <div className="w-2/3">
           <Swiper

@@ -18,8 +18,10 @@ export default function MyOrdersPage() {
   const [data, action] = useFormState(emailOrderHistory, {});
 
   return (
-    <div className="container mx-auto py-6">
-      <h2 className="text-3xl font-bold pb-6">My Orders</h2>
+    <div className="container mx-auto py-6 px-6">
+      <h2 className="text-3xl font-bold pb-6 text-transparent bg-gradient-violet-pink bg-clip-text">
+        My Orders
+      </h2>
       <form action={action} className="max-w-xl">
         <Card>
           <CardHeader>

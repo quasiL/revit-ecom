@@ -85,12 +85,12 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="w-3/5 mx-auto mb-7">
+    <section className="w-3/5 mx-auto mb-7 text-white">
       <h1 className="text-2xl font-bold pb-8 text-center">
         If you have any questions about the course, feel free to ask!
       </h1>
       <div className="flex justify-between items-start gap-12">
-        <div className="w-2/5 bg-slate-500 h-[40rem]">placeholder</div>
+        <div className="w-2/5 bg-slate-500 h-[38rem]">placeholder</div>
         <div className="w-3/5">
           <Form {...form}>
             <form

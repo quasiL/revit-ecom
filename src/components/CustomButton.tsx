@@ -28,11 +28,11 @@ function Button({
 }) {
   return (
     <button
-      className="rounded-xl bg-gradient-violet-pink p-[2px]"
+      className="group rounded-xl bg-gradient-violet-pink p-[2px]"
       type={submit ? "submit" : "button"}
     >
       <div className="flex h-full w-full items-center justify-center bg-gray-700 px-5 py-3 rounded-xl hover:bg-gradient-violet-pink">
-        <p className="text-white">{children}</p>
+        <p className="text-white group-hover:text-black">{children}</p>
       </div>
     </button>
   );

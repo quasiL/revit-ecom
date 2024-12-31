@@ -29,10 +29,10 @@ export default function EndSection() {
         />
       </div>
       <div className="bg-gray-900">
-        <div className="container mx-auto flex justify-between items-center p-12 text-white">
+        <div className="container mx-auto flex justify-between items-center px-6 py-12 text-white">
           <div className="flex gap-4 items-center">
-            <Link className="flex items-center gap-4" href="/">
-              <img src="/logo.svg" alt="Logo" className="w-14" />
+            <Link className="flex items-center gap-2" href="/">
+              <img src="/logo.png" alt="Logo" className="w-14" />
               <img src="/textlogo.svg" alt="Text Logo" className="w-72" />
             </Link>
             <div className="h-14 w-[1px] bg-white"></div>

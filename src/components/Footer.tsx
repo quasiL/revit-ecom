@@ -3,12 +3,11 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="bg-gray-200">
-      <div className="container mx-auto flex items-center justify-between p-8">
+      <div className="container mx-auto flex items-center justify-between px-6 py-8">
         <div className="flex gap-8">
           {[
             { text: "About", href: "/about" },
             { text: "FAQ", href: "/faq" },
-            { text: "Roadmap", href: "/roadmap" },
             { text: "Terms of Use", href: "/terms" },
             { text: "Privacy Policy", href: "/privacy" },
           ].map((item) => (
