@@ -24,6 +24,7 @@ const addSchema = z.object({
     )
     .nonempty({ message: "At least one image is required" }),
   videoUrl: z.string().url("Invalid video URL").optional(),
+  markdownContent: z.string().optional(),
 });
 
 type ProcessedFormData = {
@@ -33,6 +34,7 @@ type ProcessedFormData = {
   file: File | null;
   images: File[];
   videoUrl: string;
+  markdownContent: string;
 };
 
 const preprocessFormData = (formData: FormData): ProcessedFormData => {
@@ -43,6 +45,7 @@ const preprocessFormData = (formData: FormData): ProcessedFormData => {
     file: formData.get("file") as File,
     images: formData.getAll("images") as File[],
     videoUrl: (formData.get("videoUrl") as string) || "",
+    markdownContent: (formData.get("markdownContent") as string) || "",
   };
 };
 
@@ -79,6 +82,7 @@ export async function addProduct(prevState: unknown, formData: FormData) {
       priceInCents: data.priceInCents,
       filePath,
       videoUrl: data.videoUrl,
+      markdownContent: data.markdownContent,
     },
   });
 
@@ -162,6 +166,7 @@ export async function updateProduct(
     data: {
       name: data.name,
       description: data.description,
+      markdownContent: data.markdownContent,
       priceInCents: data.priceInCents,
       filePath,
       videoUrl: data.videoUrl,

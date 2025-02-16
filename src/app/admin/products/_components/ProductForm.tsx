@@ -9,6 +9,7 @@ import { useState } from "react";
 import { addProduct, updateProduct } from "../../_actions/products";
 import { useFormState, useFormStatus } from "react-dom";
 import { Product } from "@prisma/client";
+import MDEditor from "@uiw/react-md-editor";
 
 export function ProductForm({ product }: { product?: Product | null }) {
   const [error, action] = useFormState(
@@ -22,6 +23,11 @@ export function ProductForm({ product }: { product?: Product | null }) {
 
   const [imagesUpdated, setImagesUpdated] = useState(false);
 
+  document.documentElement.setAttribute("data-color-mode", "light");
+  const [markdownContent, setMarkdownDescription] = useState<string>(
+    product?.markdownContent || ""
+  );
+
   const handleImageChange = () => {
     setImagesUpdated(true);
   };
@@ -30,6 +36,7 @@ export function ProductForm({ product }: { product?: Product | null }) {
     <form
       action={(formData: FormData) => {
         formData.append("imagesUpdated", imagesUpdated.toString());
+        formData.append("markdownContent", markdownContent);
         action(formData);
       }}
       className="space-y-8"
@@ -83,7 +90,7 @@ export function ProductForm({ product }: { product?: Product | null }) {
         {error.file && <div className="text-destructive">{error.file}</div>}
       </div>
       <div className="space-y-2">
-        <Label htmlFor="images">Image</Label>
+        <Label htmlFor="images">Images</Label>
         <Input
           type="file"
           id="images"
@@ -106,6 +113,14 @@ export function ProductForm({ product }: { product?: Product | null }) {
         {error.videoUrl && (
           <div className="text-destructive">{error.videoUrl}</div>
         )}
+      </div>
+      <div className="">
+        <MDEditor
+          value={markdownContent}
+          minHeight={100}
+          onChange={(value) => setMarkdownDescription(value || "")}
+        />
+        {/* <MDEditor.Markdown source={value} style={{ whiteSpace: "pre-wrap" }} /> */}
       </div>
       <SubmitButton />
     </form>

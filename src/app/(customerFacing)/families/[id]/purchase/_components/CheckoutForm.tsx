@@ -28,6 +28,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import "swiper/css/thumbs";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 type CheckoutFormProps = {
   product: {
@@ -37,6 +39,7 @@ type CheckoutFormProps = {
     priceInCents: number;
     description: string;
     videoUrl: string;
+    markdownContent: string;
   };
   clientSecret: string;
   images: { imagePath: string }[];
@@ -90,6 +93,11 @@ export function CheckoutForm({
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
+      <div className="">
+        <Markdown remarkPlugins={[remarkGfm]}>
+          {product.markdownContent}
+        </Markdown>
+      </div>
       <Elements options={{ clientSecret }} stripe={stripePromise}>
         <Form priceInCents={product.priceInCents} productId={product.id} />
       </Elements>
