@@ -18,14 +18,25 @@ model Product {
   name                   String
   priceInCents           Int
   filePath               String
-  videoUrl               String
-  description            String
+  videoUrl               String?
+  description            String?
+  markdownContent        String
   isAvailableForPurchase Boolean                @default(true)
   createdAt              DateTime               @default(now())
   updatedAt              DateTime               @updatedAt
   orders                 Order[]
   downloadVerifications  DownloadVerification[]
   images                 ProductImage[]
+  freeProduct            FreeProduct?
+}
+
+model FreeProduct {
+  id        String   @id @default(uuid())
+  name      String
+  filePath  String
+  videoUrl  String?
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String   @unique
 }
 
 model ProductImage {
