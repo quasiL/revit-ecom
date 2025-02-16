@@ -30,6 +30,7 @@ import "swiper/css/free-mode";
 import "swiper/css/thumbs";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import MDEditor from "@uiw/react-md-editor";
 
 type CheckoutFormProps = {
   product: {
@@ -54,6 +55,8 @@ export function CheckoutForm({
   clientSecret,
   images = [],
 }: CheckoutFormProps) {
+  //document.documentElement.setAttribute("data-color-mode", "light");
+
   return (
     <div className="max-w-7xl w-full mx-auto space-y-8 py-6 text-white">
       <div className="flex gap-10 items-start">
@@ -97,6 +100,11 @@ export function CheckoutForm({
         <Markdown remarkPlugins={[remarkGfm]}>
           {product.markdownContent}
         </Markdown>
+      </div>
+      <div data-color-mode="dark">
+        <div className="wmde-markdown-var">
+          <MDEditor.Markdown source={product.markdownContent} />
+        </div>
       </div>
       <Elements options={{ clientSecret }} stripe={stripePromise}>
         <Form priceInCents={product.priceInCents} productId={product.id} />
