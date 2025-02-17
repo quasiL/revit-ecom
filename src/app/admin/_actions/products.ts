@@ -23,7 +23,7 @@ const addSchema = z.object({
         .refine((file) => file.size > 0, "Image cannot be empty")
     )
     .nonempty({ message: "At least one image is required" }),
-  videoUrl: z.string().url("Invalid video URL").optional(),
+  videoUrl: z.string().url("Invalid video URL").optional().or(z.literal("")),
   markdownContent: z.string().optional(),
 });
 

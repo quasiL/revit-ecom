@@ -28,8 +28,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import "swiper/css/thumbs";
-import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import MDEditor from "@uiw/react-md-editor";
 
 type CheckoutFormProps = {
@@ -55,7 +53,7 @@ export function CheckoutForm({
   clientSecret,
   images = [],
 }: CheckoutFormProps) {
-  //document.documentElement.setAttribute("data-color-mode", "light");
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   return (
     <div className="max-w-7xl w-full mx-auto space-y-8 py-6 text-white">
@@ -78,37 +76,45 @@ export function CheckoutForm({
             ))}
           </Swiper>
         </div>
-        <div>
-          <div className="text-lg">
+        <div className="flex flex-col gap-4">
+          <h1 className="text-4xl font-bold">{product.name}</h1>
+          <div className="text-2xl">
             {formatCurrency(product.priceInCents / 100)}
           </div>
-          <h1 className="text-2xl font-bold">{product.name}</h1>
-          <div className="line-clamp-6 text-muted-foreground">
-            {product.description}
+        </div>
+      </div>
+      <button
+        className="bg-emerald-500 text-white py-2 px-4 rounded hover:bg-emerald-600"
+        onClick={() => setIsFormVisible(!isFormVisible)}
+      >
+        {isFormVisible ? "Hide Payment Form" : "Proceed to Payment"}
+      </button>
+      {isFormVisible && (
+        <Elements options={{ clientSecret }} stripe={stripePromise}>
+          <Form priceInCents={product.priceInCents} productId={product.id} />
+        </Elements>
+      )}
+      <div className="text-muted-foreground">{product.description}</div>
+      {product.videoUrl && (
+        <iframe
+          width="560"
+          height="315"
+          src={getEmbedUrl(product.videoUrl)}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      )}
+      {product.markdownContent && (
+        <div data-color-mode="dark" className="border border-slate-600">
+          <div className="wmde-markdown-var">
+            <MDEditor.Markdown
+              source={product.markdownContent}
+              style={{ padding: 16 }}
+            />
           </div>
         </div>
-      </div>
-      <iframe
-        width="560"
-        height="315"
-        src={getEmbedUrl(product.videoUrl)}
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      ></iframe>
-      <div className="">
-        <Markdown remarkPlugins={[remarkGfm]}>
-          {product.markdownContent}
-        </Markdown>
-      </div>
-      <div data-color-mode="dark">
-        <div className="wmde-markdown-var">
-          <MDEditor.Markdown source={product.markdownContent} />
-        </div>
-      </div>
-      <Elements options={{ clientSecret }} stripe={stripePromise}>
-        <Form priceInCents={product.priceInCents} productId={product.id} />
-      </Elements>
+      )}
     </div>
   );
 }

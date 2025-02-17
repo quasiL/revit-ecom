@@ -107,7 +107,6 @@ export function ProductForm({ product }: { product?: Product | null }) {
           type="text"
           id="videoUrl"
           name="videoUrl"
-          required
           defaultValue={product?.videoUrl || ""}
         />
         {error.videoUrl && (
@@ -120,7 +119,6 @@ export function ProductForm({ product }: { product?: Product | null }) {
           minHeight={100}
           onChange={(value) => setMarkdownDescription(value || "")}
         />
-        {/* <MDEditor.Markdown source={value} style={{ whiteSpace: "pre-wrap" }} /> */}
       </div>
       <SubmitButton />
     </form>
