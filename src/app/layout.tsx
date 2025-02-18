@@ -3,6 +3,8 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import "mingcute_icon/font/Mingcute.css";
 import { Toaster } from "@/components/ui/toaster";
+import "react-cookie-manager/style.css";
+import CookieConsentWrapper from "@/components/CookieConsentWrapper";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "200"] });
 
@@ -21,7 +23,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={`${poppins.className} antialiased`}>
-        {children}
+        <CookieConsentWrapper>{children}</CookieConsentWrapper>
         <Toaster />
       </body>
     </html>
