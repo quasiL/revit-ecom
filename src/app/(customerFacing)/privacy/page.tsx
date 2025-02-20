@@ -20,9 +20,9 @@ export default function Privacy() {
           <h2 className={titleStyle}>1. General Data Collection</h2>
           <p>
             At Simple Revit, we prioritize protecting the privacy and security
-            of our customers' personal information. This Privacy Policy outlines
-            our practices regarding the collection, use, and disclosure of
-            personal data. By purchasing and using our digital products,
+            of our customer&apos;s personal information. This Privacy Policy
+            outlines our practices regarding the collection, use, and disclosure
+            of personal data. By purchasing and using our digital products,
             customers acknowledge and accept the practices described in this
             document, in compliance with applicable laws. Simple Revit reserves
             the right to update this Privacy Policy at any time to reflect
