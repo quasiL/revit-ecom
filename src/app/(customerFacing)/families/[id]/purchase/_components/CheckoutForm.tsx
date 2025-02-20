@@ -20,7 +20,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, FreeMode, Thumbs, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -54,9 +54,29 @@ export function CheckoutForm({
   images = [],
 }: CheckoutFormProps) {
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const [fullScreenImage, setFullScreenImage] = useState<string | null>(null);
+
+  const handleImageClick = (imagePath: string) => {
+    setFullScreenImage(imagePath);
+  };
+
+  const closeFullScreen = () => {
+    setFullScreenImage(null);
+  };
+
+  useEffect(() => {
+    if (fullScreenImage) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [fullScreenImage]);
 
   return (
-    <div className="max-w-7xl w-full mx-auto space-y-8 py-6 text-white">
+    <div className="max-w-7xl w-full mx-auto flex flex-col gap-6 py-6 text-white">
       <div className="flex gap-10 items-start">
         <div className="w-2/3">
           <Swiper
@@ -71,7 +91,13 @@ export function CheckoutForm({
           >
             {images.map((image, index) => (
               <SwiperSlide key={index}>
-                <Image src={image.imagePath} alt={product.name} fill />
+                <Image
+                  src={image.imagePath}
+                  alt={product.name}
+                  fill
+                  className="cursor-pointer"
+                  onClick={() => handleImageClick(image.imagePath)}
+                />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -84,7 +110,7 @@ export function CheckoutForm({
         </div>
       </div>
       <button
-        className="bg-emerald-500 text-white py-2 px-4 rounded hover:bg-emerald-600"
+        className="bg-emerald-600 text-white py-2 px-4 rounded hover:bg-emerald-500 w-1/6"
         onClick={() => setIsFormVisible(!isFormVisible)}
       >
         {isFormVisible ? "Hide Payment Form" : "Proceed to Payment"}
@@ -111,6 +137,28 @@ export function CheckoutForm({
             <MDEditor.Markdown
               source={product.markdownContent}
               style={{ padding: 16 }}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Full-Screen Image Viewer */}
+      {fullScreenImage && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50"
+          onClick={closeFullScreen}
+        >
+          <div className="relative max-w-5xl w-full max-h-[90vh] flex justify-center items-center">
+            <button
+              className="absolute top-2 right-2 text-white text-xl bg-black bg-opacity-50 w-8 h-8 flex items-center justify-center rounded-full hover:bg-opacity-75 z-50"
+              onClick={closeFullScreen}
+            >
+              ✕
+            </button>
+            <img
+              src={fullScreenImage}
+              alt="Full-Screen View"
+              className="w-auto max-h-full rounded-lg"
             />
           </div>
         </div>
