@@ -18,7 +18,10 @@ export default function NavLinks() {
       <div className="flex gap-8 text-gray-400">
         {links.map((link) => {
           return (
-            <div key={link.name} className="flex items-center gap-2 group">
+            <div
+              key={link.name}
+              className="flex items-center gap-2 group text-lg"
+            >
               <Link
                 key={link.name}
                 href={link.href}

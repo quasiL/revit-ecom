@@ -33,9 +33,7 @@ const getProductImages = cache(
 export default function Families() {
   return (
     <main className="container mx-auto px-6">
-      <h2 className="text-3xl font-bold py-6 text-transparent bg-gradient-violet-pink bg-clip-text">
-        Families
-      </h2>
+      <h2 className="text-3xl font-bold py-6 text-revitGold">Families</h2>
       <ProductGridSection productsFetcher={getProducts} />
     </main>
   );

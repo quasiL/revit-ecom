@@ -19,9 +19,7 @@ export default function MyOrdersPage() {
 
   return (
     <div className="container mx-auto py-6 px-6">
-      <h2 className="text-3xl font-bold pb-6 text-transparent bg-gradient-violet-pink bg-clip-text">
-        My Orders
-      </h2>
+      <h2 className="text-3xl font-bold pb-6 text-revitGold">My Orders</h2>
       <form action={action} className="max-w-xl">
         <Card>
           <CardHeader>

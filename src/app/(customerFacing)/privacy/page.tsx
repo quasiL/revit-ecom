@@ -8,13 +8,11 @@ export const metadata: Metadata = {
 export default function Privacy() {
   const titleStyle = "text-2xl mb-4 font-semibold";
   const email = "mailto:support@simplerevit.com";
-  const emailStyle = "text-emerald-500 underline";
+  const emailStyle = "text-revitGreen underline";
 
   return (
     <div className="container mx-auto px-6">
-      <h2 className="text-3xl font-bold py-6 text-transparent bg-gradient-violet-pink bg-clip-text">
-        Privacy Policy
-      </h2>
+      <h2 className="text-3xl font-bold py-6 text-revitGold">Privacy Policy</h2>
       <div className="space-y-6 text-gray-400">
         <section>
           <h2 className={titleStyle}>1. General Data Collection</h2>

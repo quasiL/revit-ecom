@@ -10,6 +10,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        revitGold: "#f4eed7",
+        revitGreen: "#54e4c5",
+        revitDarkGreen: "#04a09d",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

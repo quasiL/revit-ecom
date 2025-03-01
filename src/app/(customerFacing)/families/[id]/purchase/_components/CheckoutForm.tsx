@@ -20,7 +20,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
-import { FormEvent, useState, useEffect } from "react";
+import { FormEvent, useState, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, FreeMode, Thumbs, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -55,6 +55,7 @@ export function CheckoutForm({
 }: CheckoutFormProps) {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [fullScreenImage, setFullScreenImage] = useState<string | null>(null);
+  const formRef = useRef<HTMLDivElement | null>(null);
 
   const handleImageClick = (imagePath: string) => {
     setFullScreenImage(imagePath);
@@ -74,6 +75,24 @@ export function CheckoutForm({
       document.body.style.overflow = "auto";
     };
   }, [fullScreenImage]);
+
+  const toggleFormVisibility = () => {
+    setIsFormVisible((prev) => {
+      const newState = !prev;
+      if (newState) {
+        setTimeout(() => {
+          formRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+          setTimeout(() => {
+            window.scrollBy({ top: 500, behavior: "smooth" }); // Adjust `100` for more space
+          }, 300); // Delay to ensure scrollIntoView completes first
+        }, 100);
+      }
+      return newState;
+    });
+  };
 
   return (
     <div className="max-w-7xl w-full mx-auto flex flex-col gap-6 py-6 text-white">
@@ -107,20 +126,15 @@ export function CheckoutForm({
           <div className="text-2xl">
             {formatCurrency(product.priceInCents / 100)}
           </div>
+          <div className="text-gray-400">{product.description}</div>
+          <button
+            className="bg-revitGreen text-black py-2 px-4 rounded hover:bg-revitDarkGreen"
+            onClick={toggleFormVisibility}
+          >
+            {isFormVisible ? "Hide Payment Form" : "Proceed to Payment"}
+          </button>
         </div>
       </div>
-      <button
-        className="bg-emerald-600 text-white py-2 px-4 rounded hover:bg-emerald-500 w-1/6"
-        onClick={() => setIsFormVisible(!isFormVisible)}
-      >
-        {isFormVisible ? "Hide Payment Form" : "Proceed to Payment"}
-      </button>
-      {isFormVisible && (
-        <Elements options={{ clientSecret }} stripe={stripePromise}>
-          <Form priceInCents={product.priceInCents} productId={product.id} />
-        </Elements>
-      )}
-      <div className="text-muted-foreground">{product.description}</div>
       {product.videoUrl && (
         <iframe
           width="560"
@@ -132,13 +146,26 @@ export function CheckoutForm({
         ></iframe>
       )}
       {product.markdownContent && (
-        <div data-color-mode="dark" className="border border-slate-600">
+        <div data-color-mode="light" className="border border-slate-600">
           <div className="wmde-markdown-var">
             <MDEditor.Markdown
               source={product.markdownContent}
               style={{ padding: 16 }}
             />
           </div>
+        </div>
+      )}
+      <button
+        className="bg-revitGreen text-black py-2 px-4 rounded hover:bg-revitDarkGreen w-1/6"
+        onClick={toggleFormVisibility}
+      >
+        {isFormVisible ? "Hide Payment Form" : "Proceed to Payment"}
+      </button>
+      {isFormVisible && (
+        <div ref={formRef} className="w-2/3">
+          <Elements options={{ clientSecret }} stripe={stripePromise}>
+            <Form priceInCents={product.priceInCents} productId={product.id} />
+          </Elements>
         </div>
       )}
 
