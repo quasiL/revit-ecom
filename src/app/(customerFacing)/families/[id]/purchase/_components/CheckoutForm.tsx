@@ -155,12 +155,14 @@ export function CheckoutForm({
           </div>
         </div>
       )}
-      <button
-        className="bg-revitGreen text-black py-2 px-4 rounded hover:bg-revitDarkGreen w-1/6"
-        onClick={toggleFormVisibility}
-      >
-        {isFormVisible ? "Hide Payment Form" : "Proceed to Payment"}
-      </button>
+      {product.markdownContent && (
+        <button
+          className="bg-revitGreen text-black py-2 px-4 rounded hover:bg-revitDarkGreen w-1/6"
+          onClick={toggleFormVisibility}
+        >
+          {isFormVisible ? "Hide Payment Form" : "Proceed to Payment"}
+        </button>
+      )}
       {isFormVisible && (
         <div ref={formRef} className="w-2/3">
           <Elements options={{ clientSecret }} stripe={stripePromise}>
