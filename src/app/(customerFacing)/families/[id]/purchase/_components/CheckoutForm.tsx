@@ -86,8 +86,8 @@ export function CheckoutForm({
             block: "start",
           });
           setTimeout(() => {
-            window.scrollBy({ top: 500, behavior: "smooth" }); // Adjust `100` for more space
-          }, 300); // Delay to ensure scrollIntoView completes first
+            window.scrollBy({ top: 500, behavior: "smooth" });
+          }, 300);
         }, 100);
       }
       return newState;
@@ -96,8 +96,8 @@ export function CheckoutForm({
 
   return (
     <div className="max-w-7xl w-full mx-auto flex flex-col gap-6 py-6 text-white">
-      <div className="flex gap-10 items-start">
-        <div className="w-2/3">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-center md:items-start px-4 md:px-0">
+        <div className="w-full md:w-2/3">
           <Swiper
             loop={true}
             spaceBetween={10}
@@ -121,12 +121,14 @@ export function CheckoutForm({
             ))}
           </Swiper>
         </div>
-        <div className="flex flex-col gap-4">
-          <h1 className="text-4xl font-bold">{product.name}</h1>
-          <div className="text-2xl">
+        <div className="flex flex-col gap-4 text-center md:text-left items-center md:items-start w-full">
+          <h1 className="text-3xl md:text-4xl font-bold">{product.name}</h1>
+          <div className="text-xl md:text-2xl">
             {formatCurrency(product.priceInCents / 100)}
           </div>
-          <div className="text-gray-400">{product.description}</div>
+          <div className="text-gray-400 text-justify">
+            {product.description}
+          </div>
           <button
             className="bg-revitGreen text-black py-2 px-4 rounded hover:bg-revitDarkGreen"
             onClick={toggleFormVisibility}
@@ -136,35 +138,41 @@ export function CheckoutForm({
         </div>
       </div>
       {product.videoUrl && (
-        <iframe
-          width="560"
-          height="315"
-          src={getEmbedUrl(product.videoUrl)}
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+        <div className="w-full max-w-2xl aspect-video mt-4 px-4 md:px-0">
+          <iframe
+            className="w-full h-full"
+            src={getEmbedUrl(product.videoUrl)}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
       )}
       {product.markdownContent && (
-        <div data-color-mode="light" className="border border-slate-600">
-          <div className="wmde-markdown-var">
-            <MDEditor.Markdown
-              source={product.markdownContent}
-              style={{ padding: 16 }}
-            />
+        <div className="px-4 md:px-0">
+          <div data-color-mode="light" className="border border-slate-600">
+            <div className="wmde-markdown-var">
+              <MDEditor.Markdown
+                source={product.markdownContent}
+                style={{ padding: 16 }}
+              />
+            </div>
           </div>
         </div>
       )}
       {product.markdownContent && (
-        <button
-          className="bg-revitGreen text-black py-2 px-4 rounded hover:bg-revitDarkGreen w-1/6"
-          onClick={toggleFormVisibility}
-        >
-          {isFormVisible ? "Hide Payment Form" : "Proceed to Payment"}
-        </button>
+        <div className="px-4 md:px-0">
+          <button
+            className="w-full md:w-auto bg-revitGreen text-black py-2 px-6 rounded hover:bg-revitDarkGreen"
+            onClick={toggleFormVisibility}
+          >
+            {isFormVisible ? "Hide Payment Form" : "Proceed to Payment"}
+          </button>
+        </div>
       )}
+
       {isFormVisible && (
-        <div ref={formRef} className="w-2/3">
+        <div ref={formRef} className="w-full md:w-2/3 px-4 md:px-0">
           <Elements options={{ clientSecret }} stripe={stripePromise}>
             <Form priceInCents={product.priceInCents} productId={product.id} />
           </Elements>
@@ -174,7 +182,7 @@ export function CheckoutForm({
       {/* Full-Screen Image Viewer */}
       {fullScreenImage && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50"
+          className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50 px-4 md:px-0"
           onClick={closeFullScreen}
         >
           <div className="relative max-w-5xl w-full max-h-[90vh] flex justify-center items-center">

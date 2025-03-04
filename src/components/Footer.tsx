@@ -4,8 +4,8 @@ export default function Footer() {
   return (
     <footer className="bg-gray-200">
       <div className="container mx-auto px-6 py-8">
-        <div className="flex items-center justify-between">
-          <div className="flex gap-8">
+        <div className="flex flex-col md:flex-row items-center md:justify-between gap-4 md:gap-8">
+          <div className="flex flex-wrap justify-center md:justify-start gap-4 md:gap-8">
             {[
               { text: "About", href: "/about" },
               { text: "FAQ", href: "/faq" },
@@ -21,7 +21,7 @@ export default function Footer() {
               </Link>
             ))}
           </div>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap justify-center md:justify-end gap-4">
             {[
               { iconClass: "mgc_linkedin_line", href: "https://linkedin.com" },
               { iconClass: "mgc_youtube_line", href: "https://youtube.com" },
@@ -42,7 +42,7 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div className="text-sm text-gray-600 pt-2">
+        <div className="pt-4 md:pt-2 md:text-left text-center text-sm text-gray-600">
           © {new Date().getFullYear()} Simple Revit. All rights reserved.
         </div>
       </div>
