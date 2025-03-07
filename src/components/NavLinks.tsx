@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
-export default function NavLinks() {
+export default function NavLinks({ onClick }: { onClick?: () => void }) {
   const pathname = usePathname();
   const links = [
     { name: "Home", href: "/" },
@@ -14,29 +14,20 @@ export default function NavLinks() {
   ];
 
   return (
-    <>
-      <div className="flex gap-8 text-gray-400">
-        {links.map((link) => {
-          return (
-            <div
-              key={link.name}
-              className="flex items-center gap-2 group text-lg"
-            >
-              <Link
-                key={link.name}
-                href={link.href}
-                className={clsx({
-                  "font-bold": pathname === link.href,
-                  "text-white": pathname === link.href,
-                  "hover:text-white": pathname !== link.href,
-                })}
-              >
-                <p>{link.name}</p>
-              </Link>
-            </div>
-          );
-        })}
-      </div>
-    </>
+    <div className="flex flex-col md:flex-row gap-4 md:gap-8 text-gray-400">
+      {links.map((link) => (
+        <Link
+          key={link.name}
+          href={link.href}
+          onClick={onClick}
+          className={clsx("text-lg", {
+            "font-bold text-white": pathname === link.href,
+            "hover:text-white": pathname !== link.href,
+          })}
+        >
+          {link.name}
+        </Link>
+      ))}
+    </div>
   );
 }
